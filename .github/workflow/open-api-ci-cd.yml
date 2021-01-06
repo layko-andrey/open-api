@@ -191,3 +191,5 @@ jobs:
           docker login -u ${{ secrets.DOCKERHUB_USER_NAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
           docker-compose -f docker-compose-server.yml up -d
           docker image ls --filter reference=openplatform/open-state:${{ github.event.release.tag_name }} -q | tail -n +4 | xargs --no-run-if-empty docker image rm
+
+
