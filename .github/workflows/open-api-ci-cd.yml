@@ -52,12 +52,12 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Execute tests
-        run: ./gradlew assemble
+        run: ./gradlew check
 
       - name: Save test results
         uses: actions/upload-artifact@v2
         with:
-          name: test_results_${{ github.sha }}
+          name: open_api_test_results_${{ github.sha }}
           path: build/reports/tests/test/**
 
       - name: Execute test coverage report
@@ -66,7 +66,7 @@ jobs:
       - name: Save test coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: test_coverage_results_${{ github.sha }}
+          name: open_api_test_coverage_results_${{ github.sha }}
           path: build/reports/jacoco/test/html/**
 
 
@@ -92,7 +92,7 @@ jobs:
       - name: Save executables
         uses: actions/upload-artifact@v2
         with:
-          name: assembles_${{ github.sha }}
+          name: open_api_assembles_${{ github.sha }}
           path: build/libs/*.jar
 
   package:
@@ -100,6 +100,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: false
     needs: [tests, build]
+    if: github.event.action == 'published'
 
     steps:
 
