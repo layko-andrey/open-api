@@ -52,7 +52,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Execute tests
-        run: ./gradlew check
+        run: ./gradlew assemble
 
       - name: Save test results
         uses: actions/upload-artifact@v2
