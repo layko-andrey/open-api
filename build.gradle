@@ -59,6 +59,8 @@ dependencies {
 
     // Test
     testCompile("org.springframework.boot:spring-boot-starter-test")
+
+    compile("org.mockito:mockito-core:2.22.0")
 }
 
 sourceSets {
