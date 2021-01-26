@@ -79,6 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: false
     needs: [tests]
+    if: github.event.action == 'published'
 
     steps:
 
@@ -104,7 +105,6 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: false
     needs: [tests, build]
-    if: github.event.action == 'published'
 
     steps:
 
@@ -129,12 +129,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER_NAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - name: Define image tag
+        run:
+          if [[ ${{ github.ref }} == refs/heads/master ]]; then export IMAGE_TAG=latest; else export IMAGE_TAG=${{ github.ref#refs/heads/ }}; fi;
+
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: openplatform/open-state:${{ github.event.release.tag_name }}
+          tags: openplatform/api:${{ IMAGE_TAG }}
           file: docker/Dockerfile
 
 
@@ -159,12 +163,6 @@ jobs:
           chmod 700 ~/.ssh
           ssh-keyscan ${{ secrets.SPRINT_SERVER }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          export DOCKER_HOST="ssh://gitlab@${{ secrets.SPRINT_SERVER }}"
-          export MONGODB_PASSWORD="${{ secrets.SPRINT_MONGO_PASSWORD }}"
-          export DOCKER_IMAGE_TAG="openplatform/open-state:${{ github.event.release.tag_name }}"
-          docker login -u ${{ secrets.DOCKERHUB_USER_NAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker-compose -f docker-compose-server.yml up -d
-          docker image ls --filter reference=openplatform/open-state:${{ github.event.release.tag_name }} -q | tail -n +4 | xargs --no-run-if-empty docker image rm
 
 
   deploy-production:
@@ -188,11 +186,6 @@ jobs:
           chmod 700 ~/.ssh
           ssh-keyscan ${{ secrets.PROD_SERVER }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          export DOCKER_HOST="ssh://gitlab@${{ secrets.PROD_SERVER }}"
-          export MONGODB_PASSWORD="${{ secrets.PROD_MONGO_PASSWORD }}"
-          export DOCKER_IMAGE_TAG="openplatform/open-state:${{ github.event.release.tag_name }}"
-          docker login -u ${{ secrets.DOCKERHUB_USER_NAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker-compose -f docker-compose-server.yml up -d
-          docker image ls --filter reference=openplatform/open-state:${{ github.event.release.tag_name }} -q | tail -n +4 | xargs --no-run-if-empty docker image rm
+
 
 
