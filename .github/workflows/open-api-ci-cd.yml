@@ -32,7 +32,7 @@ jobs:
       postgres:
         image: postgres:latest
         ports:
-          - 8080:8080
+          - 5432:5432
         env:
           POSTGRES_PASSWORD: open-api
           POSTGRES_USER: open-api
