@@ -1,4 +1,4 @@
-FROM openjdk:12.0.2-oracle
+FROM openjdk:8-jre-alpine
 
 WORKDIR root/
 
