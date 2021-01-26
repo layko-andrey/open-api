@@ -7,9 +7,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-internal class OpenKeyRepositoryTests : RepositoryTests() {
+internal class OpenKeyRepositoryTests /*: RepositoryTests()*/ {
 
-    @Autowired
+    /*@Autowired
     private lateinit var repository: OpenKeyRepository
 
 
@@ -38,5 +38,5 @@ internal class OpenKeyRepositoryTests : RepositoryTests() {
     }
 
     private fun persistUser(): User = entityManager.persist(User("googleId"))
-
+*/
 }

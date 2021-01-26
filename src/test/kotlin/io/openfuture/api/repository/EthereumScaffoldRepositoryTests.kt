@@ -17,7 +17,7 @@ internal class EthereumScaffoldRepositoryTests : RepositoryTests() {
     private lateinit var repositoryEthereum: EthereumScaffoldRepository
 
 
-    //@Test
+    @Test
     fun findByAddressAndOpenKeyUserTest() {
         val expectedScaffold = persistEntities()
         val address = expectedScaffold.address
