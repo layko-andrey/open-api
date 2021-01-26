@@ -106,6 +106,9 @@ jobs:
     continue-on-error: false
     needs: [tests, build]
 
+    env:
+      IMAGE_TAG: latest
+
     steps:
 
       - name: Checkout repository
