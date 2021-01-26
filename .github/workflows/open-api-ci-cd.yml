@@ -16,6 +16,9 @@ jobs:
 
     env:
       POSTGRES_HOST: localhost
+      POSTGRES_PASSWORD: open-api
+      POSTGRES_USER: open-api
+      POSTGRES_DB: open-api
       GOOGLE_CLIENT_ID: secrets.GOOGLE_CLIENT_ID_DEV
       GOOGLE_CLIENT_SECRET: secrets.GOOGLE_CLIENT_SECRET_DEV
       NETWORK_URL: secrets.NETWORK_URL_DEV
@@ -43,7 +46,7 @@ jobs:
       - name: Prepare Java SDK 12
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 12
 
       - name: Cache Gradle packages
         uses: actions/cache@v2
