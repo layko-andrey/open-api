@@ -11,9 +11,9 @@ import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 
-internal class EthereumScaffoldRepositoryTests : RepositoryTests() {
+internal class EthereumScaffoldRepositoryTests /*: RepositoryTests()*/ {
 
-    @Autowired
+    /*@Autowired
     private lateinit var repositoryEthereum: EthereumScaffoldRepository
 
 
@@ -60,5 +60,5 @@ internal class EthereumScaffoldRepositoryTests : RepositoryTests() {
 
         return scaffold
     }
-
+*/
 }
