@@ -18,7 +18,7 @@ internal class TransactionRepositoryTests : RepositoryTests() {
     private lateinit var repository: EthereumTransactionRepository
 
 
-    @Test
+    //@Test
     fun findAllByScaffoldTest() {
         val user = User("googleId")
         entityManager.persist(user)

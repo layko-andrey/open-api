@@ -17,7 +17,7 @@ internal class EthereumScaffoldRepositoryTests : RepositoryTests() {
     private lateinit var repositoryEthereum: EthereumScaffoldRepository
 
 
-    @Test
+    //@Test
     fun findByAddressAndOpenKeyUserTest() {
         val expectedScaffold = persistEntities()
         val address = expectedScaffold.address
@@ -28,7 +28,7 @@ internal class EthereumScaffoldRepositoryTests : RepositoryTests() {
         assertThat(actualScaffold).isEqualTo(expectedScaffold)
     }
 
-    @Test
+    //@Test
     fun findByAddressTest() {
         val expectedScaffold = persistEntities()
         val address = expectedScaffold.address
@@ -38,7 +38,7 @@ internal class EthereumScaffoldRepositoryTests : RepositoryTests() {
         assertThat(actualScaffold).isEqualTo(expectedScaffold)
     }
 
-    @Test
+    //@Test
     fun findAllByOpenKeyUserTest() {
         val expectedScaffold = persistEntities()
         val user = expectedScaffold.openKey.user

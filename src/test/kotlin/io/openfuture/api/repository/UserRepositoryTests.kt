@@ -12,7 +12,7 @@ internal class UserRepositoryTests : RepositoryTests() {
     private lateinit var repository: UserRepository
 
 
-    @Test
+    //@Test
     fun findByGoogleIdTest() {
         val googleId = "googleId"
         val expectedUser = User(googleId)

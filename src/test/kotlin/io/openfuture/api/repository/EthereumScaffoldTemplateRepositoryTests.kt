@@ -12,7 +12,7 @@ internal class EthereumScaffoldTemplateRepositoryTests : RepositoryTests() {
     private lateinit var repository: EthereumScaffoldTemplateRepository
 
 
-    @Test
+    //@Test
     fun findAllByUserAndDeletedIsFalseTest() {
         val scaffoldTemplate = createScaffoldTemplate("template")
         val deletedScaffoldTemplate = createScaffoldTemplate("deleted_template").apply { deleted = true }
