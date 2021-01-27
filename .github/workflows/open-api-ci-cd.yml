@@ -145,8 +145,31 @@ jobs:
           file: docker/Dockerfile
 
 
-  deploy-sprint:
-    name: Deploy Sprint
+#  deploy-sprint:
+#    name: Deploy Sprint
+#    runs-on: ubuntu-latest
+#    continue-on-error: false
+#    needs: [tests, build, package]
+
+#    steps:
+
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+
+#      - name: Deploy server
+#        run: |
+#          sudo apt install openssh-client
+#          sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#          eval $(ssh-agent -s)
+#          echo "${{ secrets.SPRINT_DEPLOY_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
+#          mkdir -p ~/.ssh
+#          chmod 700 ~/.ssh
+#          ssh-keyscan ${{ secrets.SPRINT_SERVER }} >> ~/.ssh/known_hosts
+#          chmod 644 ~/.ssh/known_hosts
+
+
+  deploy-production:
+    name: Deploy Production
     runs-on: ubuntu-latest
     continue-on-error: false
     needs: [tests, build, package]
@@ -161,34 +184,12 @@ jobs:
           sudo apt install openssh-client
           sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           eval $(ssh-agent -s)
-          echo "${{ secrets.SPRINT_DEPLOY_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          ssh-keyscan ${{ secrets.SPRINT_SERVER }} >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-
-  deploy-production:
-    name: Deploy Production
-    runs-on: ubuntu-latest
-    continue-on-error: false
-    needs: [tests, build, package, deploy-sprint]
-
-    steps:
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Deploy server
-        run: |
-          sudo apt install openssh-client
-          sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          eval $(ssh-agent -s)
-          echo "${{ secrets.PROD_DEPLOY_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY_PROD }}" | tr -d '\r' | ssh-add - > ~/.ssh
           ssh-keyscan ${{ secrets.PROD_SERVER }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
+          ssh ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "docker -help"
 
 
 
