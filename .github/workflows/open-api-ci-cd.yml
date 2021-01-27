@@ -186,7 +186,7 @@ jobs:
           eval $(ssh-agent -s)
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY_PROD }}" | tr -d '\r' | ssh-add - > ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY_PROD }}" | tr -d '\r' | ssh-add - > ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.PROD_SERVER }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
           ssh ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "docker -help"
