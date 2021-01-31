@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest
 class ApplicationTests {
 
-    //@Test
+    @Test
     fun contextLoadsTest() {
     }
 
