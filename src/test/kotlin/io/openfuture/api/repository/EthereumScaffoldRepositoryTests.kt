@@ -11,9 +11,9 @@ import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 
-internal class EthereumScaffoldRepositoryTests /*: RepositoryTests()*/ {
+internal class EthereumScaffoldRepositoryTests : RepositoryTests() {
 
-    /*@Autowired
+    @Autowired
     private lateinit var repositoryEthereum: EthereumScaffoldRepository
 
 
@@ -28,7 +28,7 @@ internal class EthereumScaffoldRepositoryTests /*: RepositoryTests()*/ {
         assertThat(actualScaffold).isEqualTo(expectedScaffold)
     }
 
-    //@Test
+    @Test
     fun findByAddressTest() {
         val expectedScaffold = persistEntities()
         val address = expectedScaffold.address
@@ -38,7 +38,7 @@ internal class EthereumScaffoldRepositoryTests /*: RepositoryTests()*/ {
         assertThat(actualScaffold).isEqualTo(expectedScaffold)
     }
 
-    //@Test
+    @Test
     fun findAllByOpenKeyUserTest() {
         val expectedScaffold = persistEntities()
         val user = expectedScaffold.openKey.user
@@ -60,5 +60,5 @@ internal class EthereumScaffoldRepositoryTests /*: RepositoryTests()*/ {
 
         return scaffold
     }
-*/
+
 }
