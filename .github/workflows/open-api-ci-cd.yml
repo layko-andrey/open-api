@@ -68,8 +68,8 @@ jobs:
 
       - name: Execute contract tests
         run: |
-          apt install g++
-          apt install -y python3-pip
+          sudo apt install g++
+          sudo apt install -y python3-pip
           npm i web3-utils
           export RPC_HOST="ganache"
           cd src/test/truffle && truffle test
