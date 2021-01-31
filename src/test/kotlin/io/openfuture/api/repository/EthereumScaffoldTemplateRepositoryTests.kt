@@ -6,9 +6,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-internal class EthereumScaffoldTemplateRepositoryTests /*: RepositoryTests()*/ {
+internal class EthereumScaffoldTemplateRepositoryTests : RepositoryTests() {
 
-    /*@Autowired
+    @Autowired
     private lateinit var repository: EthereumScaffoldTemplateRepository
 
 
@@ -26,5 +26,4 @@ internal class EthereumScaffoldTemplateRepositoryTests /*: RepositoryTests()*/ {
 
     private fun createScaffoldTemplate(scaffoldTemplateName: String): EthereumScaffoldTemplate = EthereumScaffoldTemplate(scaffoldTemplateName,
             "developerAddress", "description", "fiat_amount", 1, "conversionAmount", "webHook", mutableListOf())
-*/
 }

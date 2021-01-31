@@ -12,13 +12,13 @@ import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 
-internal class TransactionRepositoryTests /*: RepositoryTests()*/ {
+internal class TransactionRepositoryTests : RepositoryTests() {
 
-    /*@Autowired
+    @Autowired
     private lateinit var repository: EthereumTransactionRepository
 
 
-    //@Test
+    @Test
     fun findAllByScaffoldTest() {
         val user = User("googleId")
         entityManager.persist(user)
@@ -35,6 +35,6 @@ internal class TransactionRepositoryTests /*: RepositoryTests()*/ {
         val actualOpenKeys = repository.findAllByEthereumScaffoldOrderByDateDesc(scaffold, PageRequest())
 
         assertThat(actualOpenKeys.contains(transaction)).isTrue()
-    }*/
+    }
 
 }

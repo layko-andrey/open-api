@@ -6,13 +6,13 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-internal class UserRepositoryTests /*: RepositoryTests()*/ {
+internal class UserRepositoryTests : RepositoryTests() {
 
-    /*@Autowired
+    @Autowired
     private lateinit var repository: UserRepository
 
 
-    //@Test
+    @Test
     fun findByGoogleIdTest() {
         val googleId = "googleId"
         val expectedUser = User(googleId)
@@ -22,5 +22,4 @@ internal class UserRepositoryTests /*: RepositoryTests()*/ {
 
         assertThat(actualUser).isEqualTo(expectedUser)
     }
-*/
 }
