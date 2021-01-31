@@ -43,6 +43,9 @@ jobs:
           POSTGRES_USER: open-api
           POSTGRES_DB: open-api
 
+      ganache:
+        image: openplatform/truffle
+
     steps:
 
       - name: Checkout repository
@@ -62,6 +65,14 @@ jobs:
 
       - name: Execute tests
         run: ./gradlew check
+
+      - name: Execute contract tests
+          run: |
+            apt install g++
+            apt install -y python3-pip
+            npm i web3-utils
+            export RPC_HOST="ganache"
+            cd src/test/truffle && truffle test
 
       - name: Save test results
         uses: actions/upload-artifact@v2
