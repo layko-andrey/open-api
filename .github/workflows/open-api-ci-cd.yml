@@ -205,29 +205,27 @@ jobs:
 
       - name: Setup SSH connection
         run: |
-          sudo apt install openssh-client
-          sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           eval $(ssh-agent -s)
+          echo "${{ secrets.DEPLOY_KEY_PROD }}" > deploy_key
+          chmod 600 ./deploy_key
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY_PROD }}" | tr -d '\r' | ssh-add - > ~/.ssh/id_rsa
-          chmod  400 ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.DEPLOY_HOST_PROD }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy image
         run: |
-          ssh ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
+          ssh -i ./deploy_key ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
                 docker pull ${{ env.DEPLOY_IMAGE_NAME }}:${{ env.DEPLOY_IMAGE_TAG }}
           "
-          ssh ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
+          ssh -i ./deploy_key ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
                 docker stop ${{ env.CONTAINER_NAME }} && \
                 IMG=\$(docker ps -a --filter='name=^/${{ env.CONTAINER_NAME }}$' --format='{{.Image}}') &&  \
                 docker rm -f ${{ env.CONTAINER_NAME }} && \
                 docker rmi \$IMG; \
                 exit 0
               "
-          ssh ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
+          ssh -i ./deploy_key ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
                 docker run -d --name '${{ env.CONTAINER_NAME }}' --restart=always \
                            -p 8080:8080 \
                            -e "POSTGRES_HOST=${ secrets.POSTGRES_HOST_PROD }}" \
