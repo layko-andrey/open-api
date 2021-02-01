@@ -228,7 +228,7 @@ jobs:
           ssh -i ./deploy_key ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
                 docker run -d --name '${{ env.CONTAINER_NAME }}' --restart=always \
                            -p 8080:8080 \
-                           -e "POSTGRES_HOST=${ secrets.POSTGRES_HOST_PROD }}" \
+                           -e "POSTGRES_HOST=${{ secrets.POSTGRES_HOST_PROD }}" \
                            -e "POSTGRES_DB=${{ secrets.POSTGRES_DB_PROD }}" \
                            -e "POSTGRES_USER=${{ secrets.POSTGRES_USER_PROD }}" \
                            -e "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD_PROD }}" \
@@ -236,7 +236,7 @@ jobs:
                            -e "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET_PROD }}" \
                            -e "NETWORK_URL=${{ secrets.NETWORK_URL_PROD }}" \
                            -e "ETHEREUM_PRIVATE_KEY=${{ secrets.ETHEREUM_PRIVATE_KEY_PROD }}" \
-                           -e "OPEN_TOKEN_ADDRESS=${ secrets.OPEN_TOKEN_ADDRESS_PROD }}" \
+                           -e "OPEN_TOKEN_ADDRESS=${{ secrets.OPEN_TOKEN_ADDRESS_PROD }}" \
                            -e "EVENT_SUBSCRIPTION=true" \
                            -e "WIDGET_HOST=${{ secrets.WIDGET_HOST_PROD }}" \
                            -e "STATE_API_URL=${{ secrets.STATE_API_URL_PROD }}" \
