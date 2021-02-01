@@ -48,6 +48,18 @@ jobs:
 
     steps:
 
+      - name: Setup SSH connection
+        run: |
+          eval $(ssh-agent -s)
+          echo "${{ secrets.DEPLOY_KEY_PROD }}" > deploy_key
+          chmod 600 ./deploy_key
+          ssh-keyscan ${{ secrets.DEPLOY_HOST_PROD }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          ssh -i ./deploy_key ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
+                          docker --version"
+
+
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
