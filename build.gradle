@@ -56,7 +56,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // JAX-B dependencies for JDK 9+
-    implementation('jakarta.xml.bind:jakarta.xml.bind-api:3.0.0')
+    implementation('jakarta.xml.bind:jakarta.xml.bind-api:2.3.2')
     implementation('org.glassfish.jaxb:jaxb-runtime:3.0.0')
     implementation('org.javassist:javassist:3.27.0-GA')
 
