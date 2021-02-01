@@ -77,6 +77,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
+      - name: Cache NodeJS packages
+        uses: actions/cache@v2
+        with:
+          path: frontend/.gradle/nodejs
+          key: ${{ runner.os }}-nodejs-${{ hashFiles('frontend/.gradle/nodejs') }}
+          restore-keys: ${{ runner.os }}-nodejs
+
       - name: Execute tests
         run: ./gradlew check
 
@@ -172,29 +179,6 @@ jobs:
           file: docker/Dockerfile
 
 
-#  deploy-sprint:
-#    name: Deploy Sprint
-#    runs-on: ubuntu-latest
-#    continue-on-error: false
-#    needs: [tests, build, package]
-
-#    steps:
-
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-
-#      - name: Deploy server
-#        run: |
-#          sudo apt install openssh-client
-#          sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-#          eval $(ssh-agent -s)
-#          echo "${{ secrets.SPRINT_DEPLOY_SSH_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
-#          mkdir -p ~/.ssh
-#          chmod 700 ~/.ssh
-#          ssh-keyscan ${{ secrets.SPRINT_SERVER }} >> ~/.ssh/known_hosts
-#          chmod 644 ~/.ssh/known_hosts
-
-
   deploy-production:
     name: Deploy Production
     runs-on: ubuntu-latest
@@ -243,6 +227,7 @@ jobs:
                            ${{ env.DEPLOY_IMAGE_NAME }}:${{ env.DEPLOY_IMAGE_TAG }}
               "
 
+
   update-certificates-production:
     name: Update certificate for production
     runs-on: ubuntu-latest
@@ -271,7 +256,7 @@ jobs:
                            certbot/certbot \
                            certonly --webroot -w /var/www/certbot/ \
                            -d ${{ secrets.SERVER_NAME_PROD }} \
-                           --renew-by-default -m devops@zensoft.io --eff-email --agree-tos --manual-public-ip-logging-ok
+                           --renew-by-default -m team@openfuture.io --eff-email --agree-tos --manual-public-ip-logging-ok
               "
           ssh -i ./deploy_key ${{ secrets.DEPLOY_USER_PROD }}@${{ secrets.DEPLOY_HOST_PROD }} "
                 sudo service nginx reload"
