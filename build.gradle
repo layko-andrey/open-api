@@ -13,7 +13,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'io.openfuture.api'
 version = 'v2.6.9'   //versionDetails().lastTag[1..-1] + (versionDetails().isCleanTag ? '' : '-DIRTY')
-sourceCompatibility = 12
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -78,13 +78,13 @@ sourceSets {
 compileKotlin {
     kotlinOptions {
         freeCompilerArgs = ["-Xjsr305=strict"]
-        jvmTarget = "12"
+        jvmTarget = "11"
     }
 }
 compileTestKotlin {
     kotlinOptions {
         freeCompilerArgs = ["-Xjsr305=strict"]
-        jvmTarget = "12"
+        jvmTarget = "11"
     }
 }
 
