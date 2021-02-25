@@ -17,7 +17,7 @@
     "ethjs-util": "^0.1.6",
     "moment": "^2.29.1",
     "node-gyp": "^7.1.2",
-    "react": "^16.4.1",
+    "react": "^17.0.1",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dates": "^17.0.0",
     "react-dom": "^16.4.1",
