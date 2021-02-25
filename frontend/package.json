@@ -11,7 +11,7 @@
     }
   },
   "dependencies": {
-    "axios": ">=0.18.1",
+    "axios": "^0.21.1",
     "ethjs": "^0.4.0",
     "ethjs-unit": "^0.1.6",
     "ethjs-util": "^0.1.6",
