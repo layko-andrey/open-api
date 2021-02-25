@@ -42,6 +42,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "lodash": ">=4.17.11"
+    "lodash": "^4.17.20"
   }
 }
