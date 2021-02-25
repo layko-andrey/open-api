@@ -63,13 +63,6 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Cache NodeJS packages
-        uses: actions/cache@v2
-        with:
-          path: frontend/.gradle/nodejs
-          key: ${{ runner.os }}-nodejs-${{ hashFiles('frontend/.gradle/nodejs') }}
-          restore-keys: ${{ runner.os }}-nodejs
-
       - name: Execute tests
         run: ./gradlew check
 
