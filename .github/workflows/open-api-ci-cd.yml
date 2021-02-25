@@ -64,7 +64,9 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Execute tests
-        run: ./gradlew check
+        run: |
+          npm cache clean --force
+          ./gradlew check
 
       - name: Execute contract tests
         run: |
