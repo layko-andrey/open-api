@@ -5,7 +5,7 @@ plugins {
 apply plugin: 'com.github.node-gradle.node'
 
 node {
-    version = '12.20.1'
+    version = '14.16.0'
     download = true
 }
 
