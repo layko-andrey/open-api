@@ -19,6 +19,7 @@ abstract class BaseModel(@Id @GeneratedValue(strategy = IDENTITY) var id: Long =
         if (id != other.id) return false
 
         return true
+
     }
 
     override fun hashCode(): Int {
