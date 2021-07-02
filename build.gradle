@@ -15,13 +15,6 @@ apply plugin: 'io.spring.dependency-management'
 group = 'io.openfuture.api'
 sourceCompatibility = 11
 
-repositories {
-    mavenCentral()
-    maven {
-        url "https://dl.bintray.com/ethereum/maven/"
-    }
-}
-
 ext {
     s3Version = "1.11.333"
 }
